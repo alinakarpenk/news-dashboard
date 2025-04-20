@@ -1,0 +1,44 @@
+.header {
+    background-color: #4a5425d1;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    gap: 30px;
+    position: relative;
+    right: 0;
+  }
+
+  .h3{
+    position: absolute;
+    left: 50px;
+    top: -20px
+  }
+  
+  .navList {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navLink {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+  }
+  
+  .navLink:hover {
+    background-color: #1c1f0e70;
+  }
+  
+  .searchInput {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    margin-left: auto;
+  }
+  
