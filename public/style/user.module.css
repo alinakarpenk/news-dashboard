@@ -1,0 +1,55 @@
+.register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    border: 1px solid rgb(133, 133, 133);
+    border-radius: 10px;
+    padding: 40px;
+    margin-bottom: 50px;
+    margin-top: 53px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: rgb(133, 133, 133);
+    color: whitesmoke;
+  
+  }
+  
+  .inputLogin{
+    margin-bottom: 10px;
+  }
+  
+  .inputEmail{
+    margin-bottom: 10px;
+  }
+  
+  .inputPass{
+    margin-bottom: 10px;
+  }
+  
+  .inputPass2{
+    margin-bottom: 10px;
+  }
+  
+  .sign{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    border: 1px solid rgb(133, 133, 133);
+    border-radius: 10px;
+    padding: 40px;
+    margin-bottom: 50px;
+    margin-top: 53px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: rgb(133, 133, 133);
+    color: whitesmoke;
+
+}
+
+.sign a {
+  color: whitesmoke;
+}

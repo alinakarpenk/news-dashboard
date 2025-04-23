@@ -12,8 +12,8 @@ export default function Header() {
                 <form> 
                     <input type="search" className={styles.searchInput}/>
                 </form>
-                <li><Link href="/sign" className={styles.navLink}>Sign</Link></li>
-                <li><Link href="/register" className={styles.navLink}>Register</Link></li>
+                <li><Link href="/user/sign" className={styles.navLink}>Sign</Link></li>
+                <li><Link href="/user/register" className={styles.navLink}>Register</Link></li>
             </ul>
         </header>
     )
