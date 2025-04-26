@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from '../../../../public/style/user.module.css'
 
 
-export default function PostUser() {
+export default function Register() {
     const [login, setLogin] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +13,7 @@ export default function PostUser() {
     const [message, setMessage] = useState('');
     const handleSubmit = async (event) => {
       event.preventDefault();
-      const res = await fetch('/api/user', { method: 'POST', headers: {
+      const res = await fetch('/api/user/register', { method: 'POST', headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -55,7 +55,7 @@ export default function PostUser() {
     <input type="password" placeholder="Password repeat" value={passwordRepeat} onChange={(event) => setPasswordRepeat(event.target.value)}/>    
     </div>
 
-          <button type="submit">Register</button>
+          <button type="submit">Зареєструватися</button>
 
 </form>
          <p>{message}</p>

@@ -1,15 +1,8 @@
 import { NextResponse } from "next/server";
-import User from "../../../models/user"
+import User from "../../../../models/user"
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
-dotenv.config()
 
-const generateToken = (userId) =>{
-    const secretKey = process.env.JWT_SECRET_KEY
-    return jwt.sign({ id: userId }, secretKey, { expiresIn: '1h' })
-}
-
+//register request
 export async function POST(request) {
     const emailMatch = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -53,3 +46,5 @@ export async function POST(request) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+
+
