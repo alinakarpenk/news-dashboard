@@ -20,7 +20,7 @@ const News = db.define("News", {
     type: DataTypes.STRING,
     allowNull: false
   },
-  userId: {
+  user_id: {
     type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -36,11 +36,11 @@ const News = db.define("News", {
 },
 {
     tableName: 'news',
-    imestamps: false
+    timestamps: false
 }
 );
 
-User.hasMany(News, { foreignKey: "userId" });
-News.belongsTo(User, { foreignKey: "userId" });
+User.hasMany(News, { foreignKey: "user_id" });
+News.belongsTo(User, { foreignKey: "user_id" });
 
 export default News;

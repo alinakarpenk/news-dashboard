@@ -14,5 +14,10 @@ export default function Profile() {
         }
       };
     
-      return <button onClick={handleLogout}>Вийти з акаунту</button>;
+      return( 
+      <div>
+      <button onClick={handleLogout}>Вийти з акаунту</button>
+      <a href='/news/add'><button >Додати новину</button></a> 
+            </div>
+      )
 }
