@@ -11,6 +11,11 @@ export async function GET(request, {params}) {
                     model: User,
                     attributes: ['login'],
                 },
+                {
+                    model: Comment,
+                    include: [{model: User, attributes: ['login']}],
+                    order: [['DESC']]
+                }
             ],
             attributes: ['id', 'image', 'title', 'text', 'date', 'user_id'],
         })
@@ -21,6 +26,5 @@ export async function GET(request, {params}) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
   
-    
   }
   

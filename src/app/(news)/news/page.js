@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
+import styles from '../../../../public/style/news.module.css'
 export default function News() {
     const [news, setNews] = useState(null)
     const router = useRouter();
@@ -32,10 +33,10 @@ export default function News() {
         {news === null ? (
             <p>Завантаження...</p>
         ) : news.length > 0 ? (
-            <ul>
+            <ul className={styles.list}>
                 {news.map((news) => (
-                    <li key={news.id}>
-                        <img src={news.image}></img>
+                    <li key={news.id} className={styles.blocks}>
+                        <img src={news.image} className={styles.image}></img>
                         <h4>{news.title}</h4>
                         <p>{news.date}</p>
                         {news.User && <p>Автор: {news.User.login}</p>}

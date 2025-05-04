@@ -25,12 +25,18 @@ export default function GetNewsByPK(){
        }
     }, [id])
     return(
-        <div>          
-            <img src={news.image}></img>
-            <h4>{news.title}</h4>
-            <p>{news.text}</p>
-            <p>{news.date}</p>
-            {news.User && <p>Автор: {news.User.login}</p>}                      
+        <div>    
+            {news === null ? (
+                <p>Loading..</p>
+            ): (
+                <>
+                   <img src={news.image}></img>
+                   <h4>{news.title}</h4>
+                   <p>{news.text}</p>
+                   <p>{news.date}</p>
+                   {news.User && <p>Автор: {news.User.login}</p>}  
+                </>
+            )}       
         </div>
     )
 }
