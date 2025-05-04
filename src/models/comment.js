@@ -13,7 +13,7 @@ const Comments = db.define("Comments", {
     type: DataTypes.STRING,
     allowNull: false
   },
-  userId: {
+  user_id: {
     type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -21,7 +21,7 @@ const Comments = db.define("Comments", {
         key: "id",
       }
   },
-  newsId: {
+  news_id: {
     type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -37,14 +37,14 @@ const Comments = db.define("Comments", {
 },
 {
     tableName: 'comments',
-    imestamps: false
+    timestamps: false
 }
 );
 
-User.hasMany(Comments, { foreignKey: "userId" });
-News.hasMany(Comments, { foreignKey: "newsId" });
-Comments.belongsTo(User, { foreignKey: "userId" });
-Comments.belongsTo(News, { foreignKey: "newsId" });
+User.hasMany(Comments, { foreignKey: "user_id" });
+News.hasMany(Comments, { foreignKey: "news_id" });
+Comments.belongsTo(User, { foreignKey: "user_id" });
+Comments.belongsTo(News, { foreignKey: "news_Id" });
 
 
 export default Comments;
