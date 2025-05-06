@@ -35,8 +35,21 @@ export default function GetNewsByPK(){
                    <p>{news.text}</p>
                    <p>{news.date}</p>
                    {news.User && <p>Автор: {news.User.login}</p>}  
+                   <h2>Коментарі:</h2>
+      {news.Comments?.length > 0 ? (
+        <ul>
+          {news.Comments.map(comment => (
+            <li key={comment.id}>
+              <p><strong>{comment.User?.login}:</strong> {comment.text}</p>
+              <small>{comment.date}</small>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Коментарів ще немає.</p>
+      )}
                 </>
-            )}       
+            )}    
         </div>
     )
 }
