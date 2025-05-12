@@ -15,6 +15,7 @@ export async function GET(request, {params}) {
                 },
                 {
                     model: Comments,
+                    //attributes: ['id','text', 'user_id', 'news_id', 'date',  ],
                     include: [{model: User, attributes: ['login']}]                
                 }
             ],

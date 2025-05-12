@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-import Comments from "../../../models/comment"
+import Comments from "../../../../../models/comment"
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
+import User from '../../../../../models/user'
 
 export async function POST(request, {params}) {
     try{
@@ -21,7 +22,12 @@ export async function POST(request, {params}) {
             user_id,
             news_id
         })
-    return NextResponse.json(addComment, { status: 201 });
+
+        const commentWithUser = await Comments.findByPk(addComment.id, {
+            include: { model: User, attributes: ['login'] }
+        });
+
+        return NextResponse.json(commentWithUser, { status: 201 });
     } catch(error){
         console.log("Error create comments", error)
         return NextResponse.json('Помилка додання коментаря', error)
