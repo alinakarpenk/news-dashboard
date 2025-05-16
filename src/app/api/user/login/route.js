@@ -31,10 +31,8 @@ export async function POST(request) {
             return NextResponse.json(
                 {message : 'Неправильна пошта або пароль'},
                 {status : 400}
-            )
-            
+            )  
         }
-
         const token = jwt.sign(
             { 
                 id: user.id 
@@ -100,4 +98,41 @@ export async function GET(request) {
         console.log("Користувач не авторизований")
         return NextResponse.json({error: error.message}, {status: 500})
     }
+}
+
+export async function PATCH(request) {
+    try{
+        const authToken = request.cookies.get('authToken')?.value;
+    if(!authToken){
+            return NextResponse.json({message: 'Користувач не авторизований'})
+        }
+        const decoded = jwt.verify(authToken, process.env.JWT_SECRET_KEY)
+        const user = await User.findByPk(decoded.id)
+     if (!user) {
+            return NextResponse.json({ message: 'Користувача не знайдено' }, { status: 404 })
+        }
+
+        const {login, lastpass, futurepass} = await request.json()
+        if (lastpass && futurepass){
+            const isPassCorrect = await bcrypt.compare(lastpass, user.password)
+            if(!isPassCorrect){
+                return NextResponse.json({message: 'Неправильно введено старий пароль'}, {status: 400})
+            }
+
+            const hashpass = await bcrypt.hash(futurepass, 10)
+            user.password = hashpass
+        }
+
+        if(login){
+            user.login = login
+        }
+
+        await user.save()
+        const {password, ...safeUser} = user.toJSON()
+        return NextResponse.json({message: 'Профіль успішно оновлено', user: safeUser})
+    } catch(error){
+        console.log(error)
+        return NextResponse.json({error: error.message}, {status: 500})
+    }
+
 }
