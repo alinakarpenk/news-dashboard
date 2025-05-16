@@ -1,5 +1,5 @@
 'use client'
-
+import styles from "../../../../public/style/profile.module.css"
 export default function Profile() {
     //return <div>profile</div>
     const handleLogout = async () => {
@@ -15,9 +15,24 @@ export default function Profile() {
       };
     
       return( 
-      <div>
-      <button onClick={handleLogout}>Вийти з акаунту</button>
-      <a href='/news/add'><button >Додати новину</button></a> 
+        <div>
+        <div className={styles.profile}>
+  <div className={styles.avatarBlock}>
+    <h2 className={styles.username}>@user123</h2>
+  </div>
+
+  <div className={styles.info}>
+    <p><strong>Email:</strong> user@example.com</p>
+    <p><strong>Роль:</strong> Користувач</p>
+  </div>
+
+  <div className={styles.actions}>
+    <button className={styles.button}>Редагувати профіль</button>
+    <button className={styles.button}>Змінити пароль</button>
+    <a href='/news/add'><button className={styles.buttonadd}>Додати новину</button></a> 
+    <button className={styles.logout} onClick={handleLogout}>Вийти</button>
+  </div>
+</div>
             </div>
       )
 }

@@ -38,7 +38,6 @@ export default function News() {
                     <li key={news.id} className={styles.blocks}>
                         <img src={news.image} className={styles.image}></img>
                         <h4>{news.title}</h4>
-                        <p>{news.date}</p>
                         {news.User && <p>Автор: {news.User.login}</p>}
                         <button onClick={() => handleGet(news.id)}>Переглянути новину</button>
                     </li>
