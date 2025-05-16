@@ -74,7 +74,7 @@ export default function GetNewsByPK() {
                     <p className={styles.text}>{news.text}</p>
                     {news.User && <p className={styles.author}>Автор: {news.User.login} </p>}
                     </div>
-                    <h2>Коментарі:</h2>
+                    <h2 className={styles.h}>Коментарі:</h2>
                     {news.Comments?.length > 0 ? (
                         <ul className={styles.ul}>
                             {news.Comments.map((comment) => (
@@ -90,7 +90,7 @@ export default function GetNewsByPK() {
                 </>
             )}
 
-            <h3>Залиште коментар:</h3>
+            <h3 className={styles.h}>Залиште коментар:</h3>
             <form onSubmit={handleSubmit}>
                 <textarea value={comment} onChange={handleCommentChange} placeholder="Напишіть ваш коментар" rows="4" required
                 className={styles.textareas}/>
