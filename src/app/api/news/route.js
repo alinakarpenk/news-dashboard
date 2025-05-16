@@ -86,6 +86,7 @@ export async function GET(request) {
           ],
           attributes: ['id', 'image', 'title', 'text', 'date', 'user_id'],
       });
+      
       await logToBetterStack({
         level: 'info',
         message: 'Всі новини відображаються',
@@ -94,6 +95,7 @@ export async function GET(request) {
         url: request.url,
         timestamp: new Date()
       });
+
       console.log(news)
       return NextResponse.json(news);
   } catch (error) {

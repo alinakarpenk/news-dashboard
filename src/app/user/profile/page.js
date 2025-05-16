@@ -1,7 +1,10 @@
 'use client'
 import styles from "../../../../public/style/profile.module.css"
+import { useEffect, useState } from "react";
+import { useParams } from 'next/navigation';
+
 export default function Profile() {
-    //return <div>profile</div>
+    const [user, setUser] = useState(null);
     const handleLogout = async () => {
         const res = await fetch('/api/user/login', {
           method: 'DELETE',
@@ -13,16 +16,31 @@ export default function Profile() {
           console.log('Помилка при виході з акаунту');
         }
       };
+          useEffect(() => {
+              const fetchData = async () => {
+                  try {
+                      const res = await fetch(`/api/user/login`);
+                      if (!res.ok) {
+                          throw new Error(`Помилка: ${res.status} ${res.statusText}`);
+                      }
+                      const data = await res.json();
+                      setUser(data);
+                  } catch (error) {
+                      console.log(error);
+                  }
+              };
+                fetchData();
+          }, []);
     
       return( 
         <div>
         <div className={styles.profile}>
   <div>
-    <h2 className={styles.username}>@user123</h2>
+    <h2 className={styles.username}>@{user?.login}</h2>
   </div>
 
   <div className={styles.info}>
-    <p><strong>Email:</strong> user@example.com</p>
+    <p><strong>Email:</strong> {user?.email} </p>
     <p><strong>Роль:</strong> Користувач</p>
   </div>
 

@@ -78,7 +78,26 @@ export async function POST(request) {
 }
 
 export async function DELETE(request) {
-    const response = NextResponse.redirect(new URL('/', request.url));
+    const response = NextResponse.redirect(new URL('/', request.url))
     response.cookies.delete('authToken')
     return response
+}
+
+export async function GET(request) {
+    try{
+        const authToken = request.cookies.get('authToken')?.value;
+        if(!authToken){
+            return NextResponse.json({message: 'Користувач не авторизований'})
+        }
+        const decoded = jwt.verify(authToken, process.env.JWT_SECRET_KEY)
+        const user = await User.findByPk(decoded.id)
+     if (!user) {
+            return NextResponse.json({ message: 'Користувача не знайдено' }, { status: 404 })
+        }
+        const { password, ...safeUser } = user.toJSON()
+        return NextResponse.json(safeUser);
+    } catch(error){
+        console.log("Користувач не авторизований")
+        return NextResponse.json({error: error.message}, {status: 500})
+    }
 }
