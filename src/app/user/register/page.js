@@ -35,8 +35,10 @@ export default function Register() {
       }
     };
     return (
+              <div className={styles.container}>
+
       <div className={styles.register}>
-       <h1>Register</h1>
+       <h1 className={styles.h1}>Register</h1>
        <form onSubmit={handleSubmit}>
 
     <div className={styles.inputLogin}>
@@ -55,10 +57,11 @@ export default function Register() {
     <input type="password" placeholder="Password repeat" value={passwordRepeat} onChange={(event) => setPasswordRepeat(event.target.value)}/>    
     </div>
 
-          <button type="submit">Зареєструватися</button>
+          <button type="submit" className={styles.signb}>Зареєструватися</button>
 
 </form>
          <p>{message}</p>
+      </div>
       </div>
     );
   }

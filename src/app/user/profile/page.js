@@ -17,7 +17,7 @@ export default function Profile() {
       return( 
         <div>
         <div className={styles.profile}>
-  <div className={styles.avatarBlock}>
+  <div>
     <h2 className={styles.username}>@user123</h2>
   </div>
 
@@ -28,8 +28,8 @@ export default function Profile() {
 
   <div className={styles.actions}>
     <button className={styles.button}>Редагувати профіль</button>
-    <button className={styles.button}>Змінити пароль</button>
-    <a href='/news/add'><button className={styles.buttonadd}>Додати новину</button></a> 
+    <button className={styles.buttonget}>Переглянути новини</button>
+    <button className={styles.buttonadd}>Додати новину</button>
     <button className={styles.logout} onClick={handleLogout}>Вийти</button>
   </div>
 </div>

@@ -34,8 +34,9 @@ export default function Sign() {
           }
         }
     return (
+        <div className={styles.container}>
         <div className={styles.sign}>
-            <h1>Sign-In</h1>
+            <h1 className={styles.h1}>Sign-In</h1>
             <form onSubmit={handleSubmit}>
                 
             <div className={styles.inputEmail}>
@@ -48,13 +49,14 @@ export default function Sign() {
         required/>
             </div>
 
-            <button type="submit">Увійти</button>
+            <button type="submit" className={styles.signb}>Увійти</button>
 
         <p>Ще не маєте аккаунт?</p><a href="/user/register">Зареєструватися</a>
             
             </form>
             <p>{message}</p>
 
+        </div>
         </div>
     )
 }
