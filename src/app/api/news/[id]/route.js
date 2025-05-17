@@ -49,4 +49,34 @@ export async function GET(request, {params}) {
     }
   
   }
-  
+
+ export async function PATCH(request, { params }) {
+    const { id } = params;
+    try {
+        const formData = await request.formData();
+        const title = formData.get('title');
+        const text = formData.get('text');
+        const file = formData.get('image');
+        const news = await News.findByPk(id);
+        if (!news) {
+            return NextResponse.json({ message: "Оголошення не знайдено" }, { status: 404 });
+        }
+        let imagePath = news.image;
+        if (file && file.name) {
+            const buffer = Buffer.from(await file.arrayBuffer());
+            const fileName = `${Date.now()}-${file.name}`;
+            const filePath = path.join(process.cwd(), 'public', 'uploads', fileName);
+            await writeFile(filePath, buffer);
+            imagePath = `/uploads/${fileName}`;
+        }
+        await news.update({
+            title,
+            text,
+            image: imagePath
+        });
+        return NextResponse.json({ message: "Оголошення оновлено", news });
+    } catch (error) {
+        console.error("PATCH error:", error);
+        return NextResponse.json({ message: "Помилка сервера" }, { status: 500 });
+    }
+}
