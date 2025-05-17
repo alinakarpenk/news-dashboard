@@ -1,10 +1,12 @@
 'use client'
 import styles from "../../../../public/style/profile.module.css"
 import { useEffect, useState } from "react";
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 export default function Profile() {
     const [user, setUser] = useState(null);
+    const router = useRouter();
+
     const handleLogout = async () => {
         const res = await fetch('/api/user/login', {
           method: 'DELETE',
@@ -31,7 +33,15 @@ export default function Profile() {
               };
                 fetchData();
           }, []);
-    
+      const handlePatchProfile = () => {
+        router.push(`/user/profile/edit`);
+    };
+        const handleGetN = () => {
+        router.push(`/user/profile/news`);
+    };
+            const handlePost = () => {
+        router.push(`/news/add`);
+    };
       return( 
         <div>
         <div className={styles.profile}>
@@ -45,9 +55,9 @@ export default function Profile() {
   </div>
 
   <div className={styles.actions}>
-    <button className={styles.button}>Редагувати профіль</button>
-    <button className={styles.buttonget}>Переглянути новини</button>
-    <button className={styles.buttonadd}>Додати новину</button>
+    <button className={styles.button} onClick={handlePatchProfile}>Редагувати профіль</button>
+    <button className={styles.buttonget} onClick={handleGetN}>Переглянути новини</button>
+    <button className={styles.buttonadd} onClick={handlePost}>Додати новину</button>
     <button className={styles.logout} onClick={handleLogout}>Вийти</button>
   </div>
 </div>
