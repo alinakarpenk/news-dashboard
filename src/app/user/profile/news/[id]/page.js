@@ -7,7 +7,6 @@ export default function EditNews() {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [image, setImage] = useState(null);
-    
     useEffect(() => {
     const fetchNews = async () => {
       const res = await fetch(`/api/news/${id}`);
@@ -20,20 +19,16 @@ export default function EditNews() {
   }, []);
 
 const handleUpd = async (e) => {
-    //e.preventDefault();
     const formData = new FormData();
     formData.append('image', image);
     formData.append('title', title);
     formData.append('text', text);
-
     try {
         const res = await fetch(`/api/news/${id}`, {
             method: 'PATCH',
             body: formData
         });
-
         const data = await res.json();
-
         if (res.ok) {
             console.log('Оголошення оновлено успішно');
         } else {

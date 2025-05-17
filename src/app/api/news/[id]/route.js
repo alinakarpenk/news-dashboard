@@ -80,3 +80,20 @@ export async function GET(request, {params}) {
         return NextResponse.json({ message: "Помилка сервера" }, { status: 500 });
     }
 }
+
+export async function DELETE(request, { params }) {
+const { id } = await params;
+    try {
+        const news = await News.findByPk(id);
+        if (!news) {
+            return NextResponse.json({ message: "Оголошення не знайдено" }, { status: 404 });
+        }
+          await Comments.destroy({ where: { news_id: id } });
+        await news.destroy();
+        return NextResponse.json({ message: "Оголошення видалено" });
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ message: "Помилка сервера" }, { status: 500 });
+    }
+}
+
