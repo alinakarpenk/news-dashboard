@@ -77,6 +77,7 @@ export async function POST(request) {
 
 export async function GET(request) {
   try {
+    
       const news = await News.findAndCountAll({
           include: [
               {
@@ -96,6 +97,7 @@ export async function GET(request) {
         timestamp: new Date()
       });
 
+  
       console.log(news)
       return NextResponse.json(news);
   } catch (error) {

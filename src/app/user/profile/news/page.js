@@ -43,10 +43,11 @@ const router = useRouter();
                     <li key={news.id} className={styles.blocks}>
                         <img src={news.image} className={styles.image}></img>
                         <h4>{news.title}</h4>
-                       {/*<button onClick={() => handleGetNews(news.id)}>Переглянути новину</button> */}
-                        <button onClick={() => handleDelete(news.id)}>Видалити</button>
-                      {/*  <button onClick={() => handlePatch(news.id)}>Редагувати</button> */}
-
+                        <div className={styles.buttonGroup}> 
+                       <button onClick={() => handleGetNews(news.id)}>Переглянути новину</button>
+                       <button onClick={() => handleDelete(news.id)}>Видалити</button>
+                       <button onClick={() => handlePatch(news.id)}>Редагувати</button>
+                       </div>
                     </li>
                 ))}
             </ul>

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from './header.module.css'
 import { useState, useEffect } from 'react';
 
+
 export default function Header() {
      const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -19,6 +20,7 @@ export default function Header() {
 
     checkAuth();
   }, []);
+
     return(
         <header className={styles.header}>
             <h3 className={styles.h3}>NewsDashboard</h3>
@@ -27,8 +29,9 @@ export default function Header() {
                 <li><Link href="/news" className={styles.navLink}>Оголошення</Link></li>
                 <form> 
                    <div>
-                         <input type="text" className={styles.searchInput} placeholder="Пошук..." />
+                         <input type="text" className={styles.searchInput} placeholder="Пошук..."/>
                    </div>
+                     <button type="submit">Пошук</button>
                 </form>
                 {!isAuthenticated ? (
           <>
