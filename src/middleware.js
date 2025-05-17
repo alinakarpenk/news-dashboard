@@ -15,7 +15,7 @@ export async function middleware(request) {
   }
 }
 export const config = {
-  matcher: ['/user/profile', '/news/add'],
+  matcher: ['/user/profile/:path*', '/news/add'],
 };
 
 

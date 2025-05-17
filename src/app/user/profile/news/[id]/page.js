@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-
+import styles from '../../../../../../public/style/edit.module.css'
 export default function EditNews() {
     const { id } = useParams(); 
     const [title, setTitle] = useState("");
@@ -39,18 +39,22 @@ const handleUpd = async (e) => {
     }
 }
         return (
-        <div>
-            <form onSubmit={handleUpd}>
+
+        <div className={styles.container}>
+        
+            <h1 className={styles.h1}>Форма оновлення новини</h1>
+            
+            <form onSubmit={handleUpd} className={styles.form}>
              <div>
-                <input type="file"  accept="image/*" onChange={(event) => setImage(event.target.files[0])}/>    
+                <input type="file"  accept="image/*" onChange={(event) => setImage(event.target.files[0])} className={styles.input}/>    
             </div>
             <div>
-                <input type="text" placeholder="Title..." value={title} onChange={(event) => setTitle(event.target.value)}/>    
+                <input type="text" placeholder="Title..." value={title} onChange={(event) => setTitle(event.target.value)} className={styles.input}/>    
             </div>
             <div>
-                <input type="text" placeholder="Text..." value={text} onChange={(event) => setText(event.target.value)}/>    
+                <input type="text" placeholder="Text..." value={text} onChange={(event) => setText(event.target.value)} className={styles.input}/>    
             </div>
-              <button type="submit">Оновити</button>
+              <button type="submit" className={styles.button}>Оновити</button>
             </form>
         </div>
     )

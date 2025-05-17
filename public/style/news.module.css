@@ -79,3 +79,13 @@
   display: block;
   transition: filter 0.3s ease;
 }
+
+.buttonedit{
+  margin-bottom: 45px;
+}
+.buttoncheck{
+  margin-bottom: 0x;
+}
+.buttondelete{
+  margin-bottom: 90px;
+}

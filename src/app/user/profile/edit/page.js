@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react";
-
+import styles from '../../../../../public/style/edit.module.css'
 export default function EditProfile() {
     const [login, setLogin] = useState("");
     const [lastpass, setPass] = useState("");
@@ -35,12 +35,14 @@ export default function EditProfile() {
     }
     }
     return (
-        <div>
-            <form onSubmit={handleUpd}>
-              <input  type="text" value={login} onChange={(e) => setLogin(e.target.value)} placeholder="Новий логін"/>
-              <input type="password" value={lastpass} onChange={(e) => setPass(e.target.value)}placeholder="Старий пароль"/>
-              <input type="password" value={futurepass} onChange={(e) => setFutPass(e.target.value)}placeholder="Новий пароль"/>
-              <button type="submit">Оновити</button>
+        <div className={styles.container}>
+                        <h1 className={styles.h1}>Форма оновлення профілю</h1>
+
+            <form onSubmit={handleUpd} className={styles.form}>
+              <input  type="text" value={login} onChange={(e) => setLogin(e.target.value)} placeholder="Новий логін"  className={styles.input}/>
+              <input type="password" value={lastpass} onChange={(e) => setPass(e.target.value)}placeholder="Старий пароль"  className={styles.input}/>
+              <input type="password" value={futurepass} onChange={(e) => setFutPass(e.target.value)}placeholder="Новий пароль"  className={styles.input}/>
+              <button type="submit" className={styles.button}>Оновити</button>
             </form>
         </div>
     )

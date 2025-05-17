@@ -32,7 +32,7 @@ const router = useRouter();
         });
     }
      const handlePatch = (id) => {
-        router.push(`/news/${id}`)
+        router.push(`/user/profile/news/${id}`)
     }
  return(
     <div>
@@ -44,9 +44,9 @@ const router = useRouter();
                         <img src={news.image} className={styles.image}></img>
                         <h4>{news.title}</h4>
                         <div className={styles.buttonGroup}> 
-                       <button onClick={() => handleGetNews(news.id)}>Переглянути новину</button>
-                       <button onClick={() => handleDelete(news.id)}>Видалити</button>
-                       <button onClick={() => handlePatch(news.id)}>Редагувати</button>
+                       <button onClick={() => handleGetNews(news.id)} className={styles.buttoncheck}>Переглянути новину</button>
+                       <button onClick={() => handleDelete(news.id)} className={styles.buttondelete}>Видалити</button>
+                       <button onClick={() => handlePatch(news.id)} className={styles.buttonedit}>Редагувати</button>
                        </div>
                     </li>
                 ))}
