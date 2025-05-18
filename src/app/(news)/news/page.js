@@ -4,7 +4,7 @@ import styles from '../../../../public/style/news.module.css';
 
 export default async function News() {
   const res = await fetch(`${process.env.BASE_URL}/api/news`, {
-    cache: 'no-store',
+    cache: 'force-cache',
   });
   const data = await res.json();
   const news = data.rows || [];
