@@ -19,7 +19,7 @@ export default function Home() {
   }, []);
   return (
     <div className={styles.div}>
-      <h1>Найновіші новини</h1>
+      <h1 className={styles.h1}>Найновіші новини</h1>
        <div className={styles.slider}>
       {news.map((item) => (
         <div key={item.id} className={styles.slide} onClick={() => router.push(`/news/${item.id}`)}>
