@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import styles from "../../../../../public/style/edit.module.css"
 
 export default function AddNews(){
@@ -40,9 +39,6 @@ export default function AddNews(){
   <input type="file" accept="image/*" onChange={(event) => setImage(event.target.files[0])} className={styles.input} />
   <input type="text" placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} className={styles.input} />
   <input type="text" placeholder="Text..." value={text} onChange={(e) => setText(e.target.value)} className={styles.input} />
-  {image && (
-    <img src={URL.createObjectURL(image)} alt="Preview" className={styles.preview} />
-  )}
   <button type="submit" className={styles.button}>Додати новину</button>
 </form>
 <p className={styles.messageArea}>{message || '\u00A0'}</p>
