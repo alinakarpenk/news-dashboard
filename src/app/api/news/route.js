@@ -98,7 +98,7 @@ export async function GET(request) {
       });
 
   
-      console.log(news)
+      //console.log(news)
       return NextResponse.json(news);
   } catch (error) {
     await logToBetterStack({

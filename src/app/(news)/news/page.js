@@ -1,12 +1,12 @@
 'use client'
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import styles from '../../../../public/style/news.module.css'
 export default function News() {
     const [news, setNews] = useState(null)
     const router = useRouter();
-
-    useEffect(() => {
+      useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch('/api/news');
@@ -24,6 +24,8 @@ export default function News() {
         fetchData();
     }, []);
 
+
+
     const handleGet = (id) => {
         router.push(`/news/${id}`);
     };
@@ -36,8 +38,7 @@ export default function News() {
             <ul className={styles.list}>
                 {news.map((news) => (
                     <li key={news.id} className={styles.blocks}>
-                        <img src={news.image} className={styles.image}></img>
-                        <h4>{news.title}</h4>
+                    <Image src={news.image} alt={news.title} width={400} height={250} className={styles.image} priority />                        <h4>{news.title}</h4>
                         {news.User && <p>Автор: {news.User.login}</p>}
                         <button onClick={() => handleGet(news.id)}>Переглянути новину</button>
                     </li>
