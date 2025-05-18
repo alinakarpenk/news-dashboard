@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from "react";
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import styles from "../../../../../public/style/get-news.module.css"
 export default function GetNewsByPK() {
@@ -9,7 +10,7 @@ export default function GetNewsByPK() {
     const params = useParams();
     const id = params.id;
 
-    useEffect(() => {
+   useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await fetch(`/api/news/${id}`);
@@ -70,8 +71,7 @@ export default function GetNewsByPK() {
                 <div className={styles.news}>
                     <h4 className={styles.h4}>{news.title}</h4>
                     <p className={styles.p}>{news.date}</p>
-                    <img src={news.image} alt={news.title} className={styles.image} />
-                    <p className={styles.text}>{news.text}</p>
+                    <Image src={news.image} alt={news.title} width={600} height={400} className={styles.image} priority/>                    <p className={styles.text}>{news.text}</p>
                     {news.User && <p className={styles.author}>Автор: {news.User.login} </p>}
                     </div>
                     <h2 className={styles.h}>Коментарі:</h2>
