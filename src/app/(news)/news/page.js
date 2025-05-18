@@ -1,53 +1,41 @@
-'use client'
-import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import styles from '../../../../public/style/news.module.css'
-export default function News() {
-    const [news, setNews] = useState(null)
-    const router = useRouter();
-      useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/news');
-                if (!response.ok) {
-                    throw new Error(`Помилка: ${response.status} ${response.statusText}`);
-                }
-                const data = await response.json();
-                setNews(data.rows || []);
-                //console.log("Оголошення:", data.rows);
+import Link from 'next/link';
+import styles from '../../../../public/style/news.module.css';
 
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchData();
-    }, []);
-
-
-
-    const handleGet = (id) => {
-        router.push(`/news/${id}`);
-    };
-
-    return (
-        <div>
-        {news === null ? (
-            <p>Завантаження...</p>
-        ) : news.length > 0 ? (
-            <ul className={styles.list}>
-                {news.map((news) => (
-                    <li key={news.id} className={styles.blocks}>
-                    <Image src={news.image} alt={news.title} width={400} height={250} className={styles.image} priority />                        <h4>{news.title}</h4>
-                        {news.User && <p>Автор: {news.User.login}</p>}
-                        <button onClick={() => handleGet(news.id)}>Переглянути новину</button>
-                    </li>
-                ))}
-            </ul>
-        ) : (
-            <p>Немає даних для відображення</p>
-        )}
+export default async function News() {
+  const res = await fetch(`${process.env.BASE_URL}/api/news`, {
+    cache: 'no-store',
+  });
+  const data = await res.json();
+  const news = data.rows || [];
+  return (
+    <div>
+      {news.length > 0 ? (
+        <ul className={styles.list}>
+          {news.map((item) => (
+            <li key={item.id} className={styles.blocks}>
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={400}
+                height={250}
+                className={styles.image}
+                priority
+              />
+              <h4>{item.title}</h4>
+              {item.User && <p>Автор: {item.User.login}</p>}
+              <Link href={`/news/${item.id}`}>
+                <button>Переглянути новину</button>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Немає даних для відображення</p>
+      )}
     </div>
-    )
-
+  );
 }
+
+
+
