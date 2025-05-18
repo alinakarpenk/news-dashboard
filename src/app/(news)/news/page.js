@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../../../../public/style/news.module.css';
 import Image from 'next/image';
