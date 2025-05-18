@@ -10,6 +10,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@vercel/speed-insights": "^1.2.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "cookies-next": "^5.1.0",
