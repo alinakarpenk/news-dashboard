@@ -1,24 +1,33 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
-import mysql2 from "mysql2"
+import pg from 'pg';
+Sequelize.postgres = pg;
+
 dotenv.config(); 
 
 /*console.log(
-    process.env.DATABASE_NAME,
-    process.env.DATABASE_USER,
-    process.env.DATABASE_PASSWORD,
-    process.env.DATABASE_HOST
+    process.env.POSTGRES_DATABASE,
+  process.env.POSTGRES_USER,
+  process.env.POSTGRES_PASSWORD,
+    process.env.POSTGRES_HOST
 )*/
 
 const db = new Sequelize(
-  process.env.DATABASE_NAME,
-  process.env.DATABASE_USER,
-  process.env.DATABASE_PASSWORD,
+  process.env.POSTGRES_DATABASE,
+  process.env.POSTGRES_USER,
+  process.env.POSTGRES_PASSWORD,
   {
-    host: process.env.DATABASE_HOST,
-    dialect: 'mysql',
+    port: 5432,
+    host: process.env.POSTGRES_HOST,
+    dialect: 'postgres',
     logging: false,
-    dialectModule: mysql2
+    dialectModule: pg,
+     dialectOptions: {
+    ssl: {
+      require: true, 
+      rejectUnauthorized: false 
+    }
+  }
   }
 );
 

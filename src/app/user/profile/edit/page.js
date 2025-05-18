@@ -18,7 +18,7 @@ export default function EditProfile() {
   }, []);
 
     const handleUpd = async (e) => {
-        //e.preventDefault();
+        e.preventDefault();
         const res = await fetch('/api/user/login', {
             method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
                 login,

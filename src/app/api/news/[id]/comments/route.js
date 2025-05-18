@@ -36,21 +36,3 @@ export async function POST(request, {params}) {
     
 }
 
-export async function PATCH(request, { params }) {
-    const { id } = params;
-    const data = await request.json();
-
-    try {
-        const news = await News.findByPk(id);
-        if (!news) {
-            return NextResponse.json({ message: "Оголошення не знайдено" }, { status: 404 });
-        }
-
-        await news.save(data);
-
-        return NextResponse.json({ message: "Оголошення оновлено", news });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json({ message: "Помилка сервера" }, { status: 500 });
-    }
-}
