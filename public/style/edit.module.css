@@ -23,7 +23,10 @@
   border: 2px solid #ddd;
   border-radius: 8px;
   transition: border-color 0.3s ease;
-  width: 400px;
+   width: 100%;
+  max-width: 500px;
+   height: 30px;
+    margin-bottom: 15px;
 }
 
 .input[type="text"]:focus,
@@ -35,10 +38,9 @@
 }
 
 .button {
-width: 300px;
+width: 200px;
+height: 45px;
   padding: 12px;
-  font-size: 1rem;
-  font-weight: 600;
   color: white;
   background-color: #52a3c3;
   border: none;
@@ -63,4 +65,13 @@ width: 300px;
   margin-bottom: 20px;
   font-size: 1.8rem;
   color: #333;
+}
+
+.preview {
+  width: 300px;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  display: block;
 }

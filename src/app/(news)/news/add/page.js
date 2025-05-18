@@ -35,7 +35,19 @@ export default function AddNews(){
 
  <div className={styles.container}>
        <h1 className={styles.h1}>Додати новину</h1>
-       <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
+      
+      <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
+  <input type="file" accept="image/*" onChange={(event) => setImage(event.target.files[0])} className={styles.input} />
+  <input type="text" placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} className={styles.input} />
+  <input type="text" placeholder="Text..." value={text} onChange={(e) => setText(e.target.value)} className={styles.input} />
+  {image && (
+    <img src={URL.createObjectURL(image)} alt="Preview" className={styles.preview} />
+  )}
+  <button type="submit" className={styles.button}>Додати новину</button>
+</form>
+<p className={styles.messageArea}>{message || '\u00A0'}</p>
+
+      {/*<form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
 
     <div>
     <input type="file"  accept="image/*" onChange={(event) => setImage(event.target.files[0])} className={styles.input}/>    
@@ -53,7 +65,7 @@ export default function AddNews(){
           <button type="submit" className={styles.button}>Додати новину</button>
 
 </form>
-         <p>{message}</p>
+         <p>{message}</p> */}
       </div>
 
     )
