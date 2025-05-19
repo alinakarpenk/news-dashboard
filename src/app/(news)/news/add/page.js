@@ -34,34 +34,14 @@ export default function AddNews(){
 
  <div className={styles.container}>
        <h1 className={styles.h1}>Додати новину</h1>
-      
-      <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
-  <input type="file" accept="image/*" onChange={(event) => setImage(event.target.files[0])} className={styles.input} />
+  <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
+  <input type="file" accept="image/*" onChange={(event) => setImage(event.target.files[0])} className={styles.input} data-testid="file-input"/>
   <input type="text" placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} className={styles.input} />
   <input type="text" placeholder="Text..." value={text} onChange={(e) => setText(e.target.value)} className={styles.input} />
   <button type="submit" className={styles.button}>Додати новину</button>
 </form>
 <p className={styles.messageArea}>{message || '\u00A0'}</p>
 
-      {/*<form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
-
-    <div>
-    <input type="file"  accept="image/*" onChange={(event) => setImage(event.target.files[0])} className={styles.input}/>    
-    </div>
-
-    <div>
-    <input type="text" placeholder="Title..." value={title} onChange={(event) => setTitle(event.target.value)} className={styles.input}/>    
-    </div>
-
-    <div>
-    <input type="text" placeholder="Text..." value={text} onChange={(event) => setText(event.target.value)} className={styles.input}/>    
-    </div>
-
-
-          <button type="submit" className={styles.button}>Додати новину</button>
-
-</form>
-         <p>{message}</p> */}
       </div>
 
     )
