@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../../../public/style/user.module.css'
+import { SignupFormSchema } from '../../../lib/definition';
 
 
 export default function Register() {
@@ -13,6 +14,12 @@ export default function Register() {
     const [message, setMessage] = useState('');
     const handleSubmit = async (event) => {
       event.preventDefault();
+      const result = SignupFormSchema.safeParse({ login, email, password, passwordRepeat });
+    if (!result.success) {
+      const firstError = Object.values(result.error.flatten().fieldErrors)[0]?.[0];
+      setMessage(firstError || 'Помилка валідації');
+      return;
+    }
       const res = await fetch('/api/user/register', { method: 'POST', headers: {
           'Content-Type': 'application/json'
         },

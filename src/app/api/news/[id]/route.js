@@ -3,10 +3,12 @@ import User from '../../../../models/user';
 import Comments from '../../../../models/comment'
 import {logToBetterStack} from '../../../../lib/Logger'
 import { NextResponse } from 'next/server';
+import { format } from 'date-fns';
 
-export async function GET(request, {params}) {
+export async function GET(request, context) {
     try{
-        const { id } = params
+         const params = await context.params; 
+         const { id } = params;
         const newsId = await News.findByPk(id, {
             include: [
                 {
@@ -22,6 +24,13 @@ export async function GET(request, {params}) {
             attributes: ['id', 'image', 'title', 'text', 'date', 'user_id'],
 
         })
+          if (!newsId) {
+      return NextResponse.json({ error: 'Новина не знайдена' }, { status: 404 });
+    }
+
+    const newsData = newsId.toJSON();
+    newsData.date = format(new Date(newsData.date), 'dd.MM.yyyy');
+
         const commentsid = newsId.Comments?.map(comment => comment.text) || []
             await logToBetterStack({
               level: 'info',
@@ -33,8 +42,7 @@ export async function GET(request, {params}) {
               url: request.url,
               date: new Date()
             });
-        console.log(newsId)
-        return NextResponse.json(newsId);
+        return NextResponse.json(newsData);
     } catch (error) {
        await logToBetterStack({
             level: 'error',

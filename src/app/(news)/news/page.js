@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default async function News() {
   const res = await fetch(`${process.env.BASE_URL}/api/news`, {
-    cache: 'force-cache',
+    cache: 'no-cache',
   });
   const data = await res.json();
   const news = data.rows || [];

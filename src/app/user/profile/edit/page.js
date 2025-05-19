@@ -1,10 +1,12 @@
 'use client'
 import { useState, useEffect } from "react";
 import styles from '../../../../../public/style/edit.module.css'
+import { EditFormSchema } from "../../../../lib/definition";
 export default function EditProfile() {
     const [login, setLogin] = useState("");
     const [lastpass, setPass] = useState("");
     const [futurepass, setFutPass] = useState("");
+    const [message, setMessage] = useState('');
     
     useEffect(() => {
     const fetchUser = async () => {
@@ -19,6 +21,12 @@ export default function EditProfile() {
 
     const handleUpd = async (e) => {
         e.preventDefault();
+            const result = EditFormSchema.safeParse({ login, futurepass });
+            if (!result.success) {
+              const firstError = Object.values(result.error.flatten().fieldErrors)[0]?.[0];
+              setMessage(firstError || 'Помилка валідації');
+              return;
+            }
         const res = await fetch('/api/user/login', {
             method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
                 login,
@@ -28,6 +36,7 @@ export default function EditProfile() {
     })
     const data = await res.json()
     if(data.ok){
+        setMessage("Профіль оновлено!");
         console.log('profile upd')
     }
     else{
@@ -44,6 +53,7 @@ export default function EditProfile() {
               <input type="password" value={futurepass} onChange={(e) => setFutPass(e.target.value)}placeholder="Новий пароль"  className={styles.input}/>
               <button type="submit" className={styles.button}>Оновити</button>
             </form>
+            <p>{message}</p>
         </div>
     )
 }
