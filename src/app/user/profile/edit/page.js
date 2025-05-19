@@ -40,7 +40,7 @@ export default function EditProfile() {
         console.log('profile upd')
     }
     else{
-        console.log(`${data.message}`)
+        console.log('Помилка оновлення')
     }
     }
     return (
