@@ -10,7 +10,7 @@ export default async function SearchResult({searchParams}) {
       }
        return (
     <div>
-      <h1>Результати пошуку: "{searchParams.q}"</h1>
+      <h1>Результати пошуку: `{searchParams.q}`</h1>
       {data.length === 0 ? (
         <p>Оголошення не знайдено.</p>
       ) : (

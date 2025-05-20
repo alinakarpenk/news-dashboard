@@ -2,6 +2,7 @@
 import {useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation';
 import styles from '../../../../../public/style/news.module.css'
+import Image from 'next/image';
 export default function GetUserNews() {
     const [news, setNews] = useState([])
 const router = useRouter();
@@ -41,7 +42,7 @@ const router = useRouter();
                 <ul className={styles.list}>
                 {news.map((news) => (
                     <li key={news.id} className={styles.blocks}>
-                        <img src={news.image} className={styles.image}></img>
+                        <Image src={news.image} className={styles.image} width={300} height={200} alt="News"/>
                         <h4>{news.title}</h4>
                         <div className={styles.buttonGroup}> 
                        <button onClick={() => handleGetNews(news.id)} className={styles.buttoncheck}>Переглянути новину</button>

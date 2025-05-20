@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from './header.module.css'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Header() {
      const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -48,9 +49,9 @@ export default function Header() {
         ) : (
           <li>
             <Link href="/user/profile">
-              <img
+              <Image
                 src="/img/free-icon-user-7323280 (1).png" alt="Аватар"
-                style={{ width: '35px', height: '35px'}}
+                width={35} height = {35}
               />
             </Link>
           </li>
