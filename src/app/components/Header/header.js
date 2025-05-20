@@ -2,10 +2,12 @@
 import Link from 'next/link'
 import styles from './header.module.css'
 import { useState, useEffect } from 'react';
-
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
      const [isAuthenticated, setIsAuthenticated] = useState(false);
+     const [search, setSearch] = useState('');
+     const router = useRouter();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -21,15 +23,22 @@ export default function Header() {
     checkAuth();
   }, []);
 
+  const handleSearch = (event) =>{
+    event.preventDefault()
+    if(search.trim() !== ''){
+       router.push(`/news/search?q=${encodeURIComponent(search)}`);
+    }
+  }
+
     return(
         <header className={styles.header}>
             <h3 className={styles.h3}>NewsDashboard</h3>
             <ul className={styles.navList}>
                 <li><Link href="/" className={styles.navLink}>Головна</Link></li>
                 <li><Link href="/news" className={styles.navLink}>Оголошення</Link></li>
-                <form> 
+                <form onSubmit={handleSearch}> 
                    <div>
-                         <input type="text" className={styles.searchInput} placeholder="Пошук..."/>
+                         <input type="text" className={styles.searchInput} placeholder="Пошук..." value={search} onChange={(event) => setSearch(event.target.value)}/>
                    </div>
                 </form>
                 {!isAuthenticated ? (

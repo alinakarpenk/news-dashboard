@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 import User from '../../../../../models/user'
 import { format } from 'date-fns';
 
-
 export async function POST(request, {params}) {
     try{
     const headersList = await headers();
