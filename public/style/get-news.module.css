@@ -106,10 +106,45 @@
 }
 
 .h{
-
   color: #fff;
   margin-left: 10px;
   margin-right: 10px;
-
 }
 
+
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    padding: 15px 10px;
+  }
+
+  .textareas {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 10;
+  }
+  .button {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  .li {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .h4 {
+    font-size: 24px;
+    text-align: center;
+  }
+  .text, .p, .author {
+    font-size: 16px;
+  }
+  .small {
+    font-size: 13px;
+  }
+}

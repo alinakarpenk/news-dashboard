@@ -17,7 +17,7 @@ export async function GET(request, context) {
                 },
                 {
                     model: Comments,
-                    //attributes: ['id','text', 'user_id', 'news_id', 'date',  ],
+                    attributes: ['id','text', 'user_id', 'news_id', 'date'],
                     include: [{model: User, attributes: ['login']}]                
                 }
             ],
@@ -30,7 +30,12 @@ export async function GET(request, context) {
 
     const newsData = newsId.toJSON();
     newsData.date = format(new Date(newsData.date), 'dd.MM.yyyy');
-
+if (Array.isArray(newsData.Comments)) {
+    newsData.Comments = newsData.Comments.map(comment => ({
+        ...comment,
+        date: format(new Date(comment.date), 'dd.MM.yyyy')
+    }));
+}
         const commentsid = newsId.Comments?.map(comment => comment.text) || []
             await logToBetterStack({
               level: 'info',

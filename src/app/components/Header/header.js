@@ -31,7 +31,6 @@ export default function Header() {
                    <div>
                          <input type="text" className={styles.searchInput} placeholder="Пошук..."/>
                    </div>
-                     <button type="submit">Пошук</button>
                 </form>
                 {!isAuthenticated ? (
           <>

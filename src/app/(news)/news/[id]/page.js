@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import styles from "../../../../../public/style/get-news.module.css"
 export default function GetNewsByPK() {
     const [news, setNews] = useState(null);
@@ -9,8 +9,12 @@ export default function GetNewsByPK() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const params = useParams();
     const id = params.id;
+    const router = useRouter()
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
    useEffect(() => {
+    const token = document.cookie.split('; ').find(row => row.startsWith('authToken='))
+    setIsAuthenticated(!!token)
         const fetchData = async () => {
             try {
                 const res = await fetch(`/api/news/${id}`);
@@ -33,9 +37,13 @@ export default function GetNewsByPK() {
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+      event.preventDefault();
+      if (!isAuthenticated) {
+      router.push('/user/sign') 
+      return
+    } else{
         setIsSubmitting(true);
-
+    }
         try {
             const res = await fetch(`/api/news/${id}/comments`, {
                 method: 'POST',
@@ -55,11 +63,13 @@ export default function GetNewsByPK() {
                 Comments: [...(prevNews.Comments || []), newComment],
             }));
             setComment('');
+        
         } catch (error) {
             console.log('Error submitting comment:', error);
         } finally {
             setIsSubmitting(false);
         }
+    
     };
 
     return (
