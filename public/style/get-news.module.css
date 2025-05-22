@@ -41,6 +41,13 @@
   color: #555;
   margin-bottom: 15px;
 }
+
+.message{
+  margin-right: 10px;
+  color: #fff;
+
+}
+
 .small {
   font-size: 15px;
   color: #999;

@@ -7,14 +7,13 @@ export default function GetNewsByPK() {
     const [news, setNews] = useState(null);
     const [comment, setComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [message, setMessage] = useState(null);
+    const [user, setUser] = useState(null);
     const params = useParams();
     const id = params.id;
     const router = useRouter()
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
    useEffect(() => {
-    const token = document.cookie.split('; ').find(row => row.startsWith('authToken='))
-    setIsAuthenticated(!!token)
         const fetchData = async () => {
             try {
                 const res = await fetch(`/api/news/${id}`);
@@ -27,23 +26,46 @@ export default function GetNewsByPK() {
                 console.log(error);
             }
         };
+    const fetchUser = async () => {
+    const res = await fetch('/api/user/auth');
+    if (res.ok) {
+      const data = await res.json();
+      if (data.authenticated) {
+        setUser(data.user);
+      }
+    }
+  }
+        fetchUser();
         if (id) {
             fetchData();
         }
     }, [id]);
 
+
+const handleDeleteComment = async (commentId) => {
+  try {
+    const res = await fetch(`/api/news/${id}/comments/${commentId}`, {
+      method: 'DELETE',
+    });
+    if (!res.ok) {
+      throw new Error('Не вдалося видалити коментар');
+    }
+    setNews((prevNews) => ({
+      ...prevNews,
+      Comments: prevNews.Comments.filter(comment => comment.id !== commentId),
+    }));
+  } catch (error) {
+     console.log(error)
+    console.error(error);
+  }
+};
     const handleCommentChange = (event) => {
         setComment(event.target.value);
     };
-
     const handleSubmit = async (event) => {
       event.preventDefault();
-      if (!isAuthenticated) {
-      router.push('/user/sign') 
-      return
-    } else{
+      setMessage('')
         setIsSubmitting(true);
-    }
         try {
             const res = await fetch(`/api/news/${id}/comments`, {
                 method: 'POST',
@@ -54,24 +76,21 @@ export default function GetNewsByPK() {
             });
 
             if (!res.ok) {
-                throw new Error('Failed to add comment');
+                throw new Error('Коментар додано не успішно');
             }
-
             const newComment = await res.json();
             setNews((prevNews) => ({
                 ...prevNews,
                 Comments: [...(prevNews.Comments || []), newComment],
             }));
             setComment('');
-        
         } catch (error) {
-            console.log('Error submitting comment:', error);
+            console.log('Помилка при додаванні новини:', error);
+             setMessage('Будь ласка зайдіть в свій аккаунт перед додаванням коментаря');
         } finally {
             setIsSubmitting(false);
         }
-    
     };
-
     return (
         <div>
             {news === null ? (
@@ -91,6 +110,9 @@ export default function GetNewsByPK() {
                                 <li key={comment.id} className={styles.li}>
                                     <p className={styles.p}><strong>{comment.User?.login}:</strong> {comment.text}</p>
                                     <small className={styles.small}>{comment.date}</small>
+                                        {user && user.id === comment.user_id && (
+                                             <button className={styles.deleteButton} onClick={() => handleDeleteComment(comment.id)}>Видалити</button>
+                                             )}
                                 </li>
                             ))}
                         </ul>
@@ -105,6 +127,7 @@ export default function GetNewsByPK() {
                 <textarea value={comment} onChange={handleCommentChange} placeholder="Напишіть ваш коментар" rows="4" required
                 className={styles.textareas}/>
                 <br />
+                {message && <p className={styles.message}>{message}</p>}
                 <button type="submit" disabled={isSubmitting} className={styles.button}>
                     {isSubmitting ? 'Додається...' : 'Додати коментар'}
                 </button>

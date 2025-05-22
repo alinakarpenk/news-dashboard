@@ -2,7 +2,7 @@
 import styles from "../../../../public/style/profile.module.css"
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from 'next/navigation';
-
+import Image from "next/image";
 export default function Profile() {
     const [user, setUser] = useState(null);
     const router = useRouter();
