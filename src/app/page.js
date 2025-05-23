@@ -22,14 +22,14 @@ export default function Home() {
     <div className={styles.div}>
       <h1 className={styles.h1}>Найновіші оголошення</h1>
        <div className={styles.slider}>
-      {news.map((item) => (
-        <div key={item.id} className={styles.slide} onClick={() => router.push(`/news/${item.id}`)}>
+      {news.map((item) => {(
+        <div key={item.id} className={styles.slide} onClick={() => {router.push(`/news/${item.id}`)}}>
           <Image src={item.image} alt={item.title} className={styles.image} width={300} height={200}/>
           <div className={styles.caption}>
             <h3>{item.title}</h3>
           </div>
         </div>
-      ))}
+      )})}
     </div>
     </div>
   )

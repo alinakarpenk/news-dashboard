@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import Image from 'next/image';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams} from 'next/navigation';
 import styles from "../../../../../public/style/get-news.module.css"
 export default function GetNewsByPK() {
     const [news, setNews] = useState(null);
@@ -11,7 +11,6 @@ export default function GetNewsByPK() {
     const [user, setUser] = useState(null);
     const params = useParams();
     const id = params.id;
-    const router = useRouter()
 
    useEffect(() => {
         const fetchData = async () => {
@@ -55,7 +54,6 @@ const handleDeleteComment = async (commentId) => {
       Comments: prevNews.Comments.filter(comment => comment.id !== commentId),
     }));
   } catch (error) {
-     console.log(error)
     console.error(error);
   }
 };

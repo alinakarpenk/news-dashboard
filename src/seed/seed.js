@@ -30,19 +30,19 @@ async function seedDatabase() {
 
     // Додаємо користувачів
     const createdUsers = await Promise.all(
-      users.map(user => User.create(user))
+      users.map(user => {User.create(user)})
     );
     console.log(`Додано ${createdUsers.length} користувачів`);
 
     // Додаємо новини
     const createdNews = await Promise.all(
-      newsList.map(news => News.create(news))
+      newsList.map(news => {News.create(news)})
     );
     console.log(`Додано ${createdNews.length} новин`);
 
     // Додаємо коментарі
     const createdComments = await Promise.all(
-      comments.map(comment => Comment.create(comment))
+      comments.map(comment => {Comment.create(comment)})
     );
     console.log(`Додано ${createdComments.length} коментарів`);
 
