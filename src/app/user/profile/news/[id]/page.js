@@ -16,7 +16,7 @@ export default function EditNews() {
       setImage(data.image || "")
     };
     fetchNews();
-  }, []);
+  }, [id]);
 
 const handleUpd = async (e) => {
     const formData = new FormData();
