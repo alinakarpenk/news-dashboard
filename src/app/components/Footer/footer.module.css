@@ -6,4 +6,22 @@
     justify-content: center;
     font-size: 10px;
     gap: 30px;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .links_item{
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .list{
+    list-style: none;
+  }
+
+  .h3{
+    color:black;
+    font-weight: 300
   }

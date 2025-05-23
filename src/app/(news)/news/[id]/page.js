@@ -109,7 +109,9 @@ const handleDeleteComment = async (commentId) => {
                                     <p className={styles.p}><strong>{comment.User?.login}:</strong> {comment.text}</p>
                                     <small className={styles.small}>{comment.date}</small>
                                         {user && user.id === comment.user_id && (
+                                            <div>
                                              <button className={styles.deleteButton} onClick={() => handleDeleteComment(comment.id)}>Видалити</button>
+                                             </div>
                                              )}
                                 </li>
                             ))}

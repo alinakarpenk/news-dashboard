@@ -9,10 +9,9 @@ export async function GET(request) {
       limit: 10,
       attributes: ['id', 'title', 'image', 'date'],
     });
-    await logToBetterStack({
+   await logToBetterStack({
                      level: 'info',
                      message: 'Успішно отримано найновіші новини',
-                     total: news.count,
                      method: request.method,
                      url: request.url,
                      date: new Date()

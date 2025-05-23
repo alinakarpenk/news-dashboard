@@ -124,6 +124,15 @@
   font-weight: 150;
 }
 
+.deleteButton{
+  margin-top: 10px;
+  padding: 10px;
+  background-color: crimson;
+  border: 1px solid crimson;
+  border-radius: 10px;
+  color: #fff;
+}
+
 @media (max-width: 600px) {
   .container {
     width: 100%;
