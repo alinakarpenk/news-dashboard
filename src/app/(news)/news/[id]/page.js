@@ -98,7 +98,9 @@ const handleDeleteComment = async (commentId) => {
                 <div className={styles.news}>
                     <h4 className={styles.h4}>{news.title}</h4>
                     <p className={styles.p}>{news.date}</p>
-                    <Image src={news.image} alt={news.title} width={600} height={400} className={styles.image} priority/>                    <p className={styles.text}>{news.text}</p>
+                    <Image src={news.image} alt={news.title} width={600} height={400} className={styles.image} priority/>                    
+                    <p className={styles.text}>{news.text}</p>
+                    <p className={styles.p2}><strong className={styles.strong}>Адреса:</strong> {news.address}</p>
                     {news.User && <p className={styles.author}>Автор: {news.User.login} </p>}
                     </div>
                     <h2 className={styles.h}>Коментарі:</h2>

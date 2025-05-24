@@ -6,6 +6,7 @@ export default function AddNews(){
     const [image, setImage] = useState(null);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
+    const [address, setAddress] = useState('');
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (event) => {
@@ -15,6 +16,7 @@ export default function AddNews(){
         formData.append('image', image);
         formData.append('title', title);
         formData.append('text', text);
+        formData.append('address', address);
         const res = await fetch('/api/news', { 
             method: 'POST',
             body: formData  
@@ -33,15 +35,15 @@ export default function AddNews(){
     return(
 
  <div className={styles.container}>
-       <h1 className={styles.h1}>Додати новину</h1>
+  <h1 className={styles.h1}>Додати новину</h1>
   <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
   <input type="file" accept="image/*" onChange={(event) => setImage(event.target.files[0])} className={styles.input} data-testid="file-input"/>
   <input type="text" placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} className={styles.input} />
   <textarea className={styles.textarea} placeholder="Text..." value={text} onChange={(e) => setText(e.target.value)}/>
+  <input type="text" placeholder="Address..." value={address} onChange={(e) => setAddress(e.target.value)} className={styles.input} />
   <button type="submit" className={styles.button}>Додати новину</button>
 </form>
 <p className={styles.messageArea}>{message || '\u00A0'}</p>
-
       </div>
 
     )

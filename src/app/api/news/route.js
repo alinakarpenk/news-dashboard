@@ -1,11 +1,36 @@
 import { NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import path from 'path';
+//import { writeFile } from 'fs/promises';
+//import path from 'path';
+import streamifier from 'streamifier';
+import cloudinary from '../../../lib/cloudinary';
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import News from '../../../models/news';
 import User from '../../../models/user';
 import {logToBetterStack} from '../../../lib/Logger'
+
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+async function uploadToCloudinary(file) {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: 'news_images',
+      },
+      (error, result) => {
+        if (result) resolve(result);
+        else reject(error);
+      }
+    );
+    streamifier.createReadStream(Buffer.from(file)).pipe(stream);
+  });
+}
+
 
 export async function POST(request) {
   try {
@@ -13,6 +38,7 @@ export async function POST(request) {
     const file = formData.get('image');
     const title = formData.get('title');
     const text = formData.get('text');
+    const address = formData.get('address')
 
     if (!file || typeof file === 'string') {
       await logToBetterStack({
@@ -25,7 +51,8 @@ export async function POST(request) {
       });
       return NextResponse.json({ error: 'Файл не переданий' }, { status: 400 });
     }
-    const token = cookies().get('authToken')?.value;
+    const cookie = await cookies() 
+    const token = cookie.get('authToken')?.value;
     if (!token) {
       await logToBetterStack({
         level: 'warn',
@@ -40,13 +67,16 @@ export async function POST(request) {
     const user_id = payload.id;
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const fileName = `${file.name}`;
+    const upload = await uploadToCloudinary(buffer);
+    /*const fileName = `${file.name}`;
     const filePath = path.join(process.cwd(), 'public', 'uploads', fileName);
-    await writeFile(filePath, buffer);
+    await writeFile(filePath, buffer);*/
     const addNews = await News.create({
-      image: `/uploads/${fileName}`,
+      /*image: `/uploads/${fileName}`,*/
+      image: upload.secure_url,
       title,
       text,
+      address,
       user_id,
     });
     await logToBetterStack({
@@ -54,6 +84,7 @@ export async function POST(request) {
       message: 'Новина успішно додана',
       news_id: addNews.id,
       title,
+      address,
       user_id,
       method: request.method,
       url: request.url,

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import styles from '../../../../../public/style/news.module.css'
 import Image from 'next/image';
 export default function GetUserNews() {
-    const [news, setNews] = useState([])
+    const [news, setNews] = useState(null)
 const router = useRouter();
     useEffect(() => {
         const fetchNews = async () => {
@@ -37,8 +37,9 @@ const router = useRouter();
     }
  return(
     <div>
-        {news.length > 0  ? (
-       <>
+     {news === null ? (
+        <p>Loading...</p>
+     ) : news.length > 0 ? (
                 <ul className={styles.list}>
                 {news.map((news) => (
                     <li key={news.id} className={styles.blocks}>
@@ -52,7 +53,6 @@ const router = useRouter();
                     </li>
                 ))}
             </ul>
-            </>
         ) : (
             <p>Немає даних для відображення</p>
         )}
