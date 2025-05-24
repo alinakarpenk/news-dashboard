@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import AddNews from '../app/(news)/news/add/page'; // ЗМІНИ шлях, якщо інший
+import AddNews from '../app/(news)/news/add/page';
 
 global.fetch = jest.fn();
 
