@@ -52,7 +52,7 @@ const handleUpd = async (e) => {
                 <input type="text" placeholder="Title..." value={title} onChange={(event) => setTitle(event.target.value)} className={styles.input}/>    
             </div>
             <div>
-                <input type="text" placeholder="Text..." value={text} onChange={(event) => setText(event.target.value)} className={styles.input}/>    
+                <textarea placeholder="Text..." value={text} onChange={(event) => setText(event.target.value)} className={styles.textarea}/>    
             </div>
               <button type="submit" className={styles.button}>Оновити</button>
             </form>

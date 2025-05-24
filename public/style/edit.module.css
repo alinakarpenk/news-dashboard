@@ -15,6 +15,7 @@
   gap: 15px;
 }
 
+.textarea,
 .input[type="text"],
 .input[type="password"],
 .input[type="file"] {
@@ -30,6 +31,7 @@
 }
 
 .input[type="text"]:focus,
+.textarea:focus,
 .input[type="password"]:focus,
 .input[type="file"]:focus {
   outline: none;
@@ -67,15 +69,6 @@ height: 45px;
   color: #333;
 }
 
-/*.preview {
-  width: 300px;
-  height: auto;
-  max-height: 200px;
-  object-fit: cover;
-  margin-bottom: 15px;
-  display: block;
-}*/
-
 @media (max-width: 600px) {
   .container {
     margin: 20px 10px;
@@ -83,12 +76,13 @@ height: 45px;
   }
 
   .input[type="text"],
+  .textarea,
   .input[type="password"],
   .input[type="file"] {
     font-size: 15px;
     height: 40px;
     margin-bottom: 10px;
-    width: 200px;
+    width: 375px;
   }
 
   .button {
