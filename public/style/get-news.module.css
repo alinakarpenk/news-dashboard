@@ -32,14 +32,23 @@
 
 .text {
   font-size: 20px;
-  /*font-weight: 600;
-  margin-top: 20px;*/
+  font-weight: 500;
+  /*margin-top: 20px;*/
   color: #333;
 }
 
 .p {
   color: #555;
   margin-bottom: 15px;
+}
+.p2 {
+  color: #555;
+  margin-bottom: 15px;
+  font-weight: 380;
+}
+
+.strong{
+  color: #A68B03;
 }
 
 .message{

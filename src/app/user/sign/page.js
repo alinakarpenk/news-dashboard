@@ -28,7 +28,7 @@ export default function Sign() {
           if (res.ok) {
             window.location.href = '/user/profile';
           } else {
-            setMessage(data.error || 'Помилка');
+            setMessage(data.error || 'Неправильна пошта або пароль!');
             setEmail('');
             setPassword('');
           }

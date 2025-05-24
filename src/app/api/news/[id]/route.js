@@ -4,6 +4,29 @@ import Comments from '../../../../models/comment'
 import {logToBetterStack} from '../../../../lib/Logger'
 import { NextResponse } from 'next/server';
 import { format } from 'date-fns';
+import streamifier from 'streamifier';
+import cloudinary from '../../../../lib/cloudinary';
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+async function uploadToCloudinary(file) {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: 'news_images',
+      },
+      (error, result) => {
+        if (result) resolve(result);
+        else reject(error);
+      }
+    );
+    streamifier.createReadStream(Buffer.from(file)).pipe(stream);
+  });
+}
 
 export async function GET(request, context) {
     try{
@@ -21,7 +44,7 @@ export async function GET(request, context) {
                     include: [{model: User, attributes: ['login']}]                
                 }
             ],
-            attributes: ['id', 'image', 'title', 'text', 'date', 'user_id'],
+            attributes: ['id', 'image', 'title', 'text', 'address', 'date', 'user_id'],
 
         })
           if (!newsId) {
@@ -63,29 +86,33 @@ if (Array.isArray(newsData.Comments)) {
   
   }
 
- export async function PATCH(request, { params }) {
-    const { id } = params;
+ export async function PATCH(request, context) {
+    const { id } = context.params;
     try {
         const formData = await request.formData();
         const title = formData.get('title');
         const text = formData.get('text');
         const file = formData.get('image');
+        const address = formData.get('address')
         const news = await News.findByPk(id);
         if (!news) {
             return NextResponse.json({ message: "Оголошення не знайдено" }, { status: 404 });
         }
-        let imagePath = news.image;
+        let upload
+        //let imagePath = news.image;
         if (file && file.name) {
             const buffer = Buffer.from(await file.arrayBuffer());
-            const fileName = `${Date.now()}-${file.name}`;
-            const filePath = path.join(process.cwd(), 'public', 'uploads', fileName);
-            await writeFile(filePath, buffer);
-            imagePath = `/uploads/${fileName}`;
+            upload = await uploadToCloudinary(buffer);
+            //const fileName = `${Date.now()}-${file.name}`;
+            //onst filePath = path.join(process.cwd(), 'public', 'uploads', fileName);
+            //await writeFile(filePath, buffer);
+            //imagePath = `/uploads/${fileName}`;
         }
         await news.update({
             title,
             text,
-            image: imagePath
+            address,
+            image: upload.secure_url
         });
         return NextResponse.json({ message: "Оголошення оновлено", news });
     } catch (error) {
