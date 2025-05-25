@@ -30,11 +30,6 @@ export async function POST(request) {
             console.log('Неправильна пошта або пароль')
             return new NextResponse(JSON.stringify({ message: 'Неправильна пошта або пароль' }), {
         status: 400,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, DELETE, PATCH, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        },
          });
         }
         const token = jwt.sign(
@@ -51,11 +46,6 @@ export async function POST(request) {
       
       const response = new NextResponse(JSON.stringify({ success: true }), {
       status: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      },
     });
           const res =  NextResponse.json({ success: true });
           res.cookies.set('authToken', token, { httpOnly: true, maxAge: 3600, path: '/',});
@@ -82,11 +72,6 @@ export async function POST(request) {
         console.log(error)
        return new NextResponse(JSON.stringify({ message: 'Помилка сервера' }), {
       status: 500,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      },
     });
     }
 }
