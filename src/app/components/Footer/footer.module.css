@@ -9,6 +9,7 @@
     color: white;
     font-weight: 600;
     font-size: 15px;
+    min-height: 200px;
   }
 
   .links_item{

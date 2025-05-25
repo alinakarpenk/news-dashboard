@@ -22,8 +22,8 @@ export default function Footer() {
       <p>Телефон: +38 (023) 456-78-90</p>
       <p>Email: news@gmail.com</p>
       <div className="socials">
-       <Link href="https://www.facebook.com/?locale=uk_UA"><Image src="/img/free-icon-facebook-4494464.png" alt="Facebook" width={30} height={30} className={styles.img}/></Link>
-       <Link href="https://www.instagram.com/"><Image src="/img/free-icon-instagram-1384015.png" alt="Instagram" width={30} height={30} /></Link>
+       <Link href="https://www.facebook.com/?locale=uk_UA"><Image src="/img/free-icon-facebook-4494464.png" alt="Facebook" width={30} height={30} className={styles.img} priority /></Link>
+       <Link href="https://www.instagram.com/"><Image src="/img/free-icon-instagram-1384015.png" alt="Instagram" width={30} height={30} priority /></Link>
       </div>
     </div>
         </div>
