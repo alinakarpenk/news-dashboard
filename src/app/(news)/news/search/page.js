@@ -2,7 +2,8 @@ import Link from "next/link";
 import styles from "../../../style/get-news.module.css"
 
 export default async function SearchResult({searchParams}) {
-      const res = await fetch(`${process.env.BASE_URL}/api/news/search?q=${searchParams.q}`);
+      const query = searchParams.q || '';
+      const res = await fetch(`${process.env.BASE_URL}/api/news/search?q=${query}`);
       const data = await res.json();
       console.log('API response data:', data);
       if(data.error){
@@ -10,7 +11,7 @@ export default async function SearchResult({searchParams}) {
       }
        return (
     <div>
-      <h1>Результати пошуку: `{searchParams.q}`</h1>
+      <h1>Результати пошуку: `{query}`</h1>
       {data.length === 0 ? (
         <p>Оголошення не знайдено.</p>
       ) : (

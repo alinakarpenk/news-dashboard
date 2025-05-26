@@ -9,8 +9,9 @@ export default async function News() {
   const data = await res.json();
   const news = data.rows || [];
   return (
-    <div>
+     <div>
       {news.length > 0 ? (
+         <div className={styles.wrap}>
         <ul className={styles.list}>
           {news.map((item) => (
             <li key={item.id} className={styles.blocks}>
@@ -30,6 +31,7 @@ export default async function News() {
             </li>
           ))}
         </ul>
+        </div>
       ) : (
         <p>Немає даних для відображення</p>
       )}

@@ -40,6 +40,7 @@ const router = useRouter();
      {news === null ? (
         <p>Loading...</p>
      ) : news.length > 0 ? (
+                <div className={styles.wrap}>
                 <ul className={styles.list}>
                 {news.map((news) => (
                     <li key={news.id} className={styles.blocks}>
@@ -53,6 +54,7 @@ const router = useRouter();
                     </li>
                 ))}
             </ul>
+            </div>
         ) : (
             <p>Немає даних для відображення</p>
         )}

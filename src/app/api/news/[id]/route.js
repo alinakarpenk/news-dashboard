@@ -114,8 +114,26 @@ if (Array.isArray(newsData.Comments)) {
             address,
             image: upload.secure_url
         });
+        await logToBetterStack({
+              level: 'Оголошення оновлено',
+              message: '',
+              title: title,
+              text: text,
+              address: address,
+              method: request.method,
+              url: request.url,
+              date: new Date()
+            });
         return NextResponse.json({ message: "Оголошення оновлено", news });
     } catch (error) {
+         await logToBetterStack({
+            level: 'error',
+            message: 'Не вдалося оновити оголошення',
+            error: error.message,
+            method: request.method,
+            url: request.url,
+            date: new Date()
+          });
         console.error("PATCH error:", error);
         return NextResponse.json({ message: "Помилка сервера" }, { status: 500 });
     }
@@ -126,12 +144,28 @@ const { id } = await params;
     try {
         const news = await News.findByPk(id);
         if (!news) {
+        await logToBetterStack({
+            level: 'warn',
+            message: 'Не вдалося видалити оголошення',
+            error: error.message,
+            method: request.method,
+            url: request.url,
+            date: new Date()
+          });
             return NextResponse.json({ message: "Оголошення не знайдено" }, { status: 404 });
         }
           await Comments.destroy({ where: { news_id: id } });
         await news.destroy();
         return NextResponse.json({ message: "Оголошення видалено" });
     } catch (error) {
+         await logToBetterStack({
+            level: 'error',
+            message: 'Не вдалося видалити оголошення',
+            error: error.message,
+            method: request.method,
+            url: request.url,
+            date: new Date()
+          });
         console.error(error);
         return NextResponse.json({ message: "Помилка сервера" }, { status: 500 });
     }
