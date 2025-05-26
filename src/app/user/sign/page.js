@@ -54,7 +54,7 @@ export default function Sign() {
         <p>Ще не маєте аккаунт?</p><a href="/user/register">Зареєструватися</a>
             
             </form>
-            <p>{message}</p>
+            <p className={styles.message}>{message}</p>
 
         </div>
         </div>
