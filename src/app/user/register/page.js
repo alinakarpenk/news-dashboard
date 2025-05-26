@@ -1,8 +1,7 @@
 //page register
 'use client'
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import styles from '../../../../public/style/user.module.css'
+import styles from '../../style/user.module.css'
 import { SignupFormSchema } from '../../../lib/definition';
 
 

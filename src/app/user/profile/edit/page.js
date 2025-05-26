@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react";
-import styles from '../../../../../public/style/edit.module.css'
+import styles from '../../../style/edit.module.css'
 import { EditFormSchema } from "../../../../lib/definition";
 export default function EditProfile() {
     const [login, setLogin] = useState("");

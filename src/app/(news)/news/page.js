@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../../../../public/style/news.module.css';
+import styles from '../../style/news.module.css';
 import Image from 'next/image';
 
 export default async function News() {

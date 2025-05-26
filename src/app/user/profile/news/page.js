@@ -1,7 +1,7 @@
 'use client'
 import {useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation';
-import styles from '../../../../../public/style/news.module.css'
+import styles from '../../../style/news.module.css'
 import Image from 'next/image';
 export default function GetUserNews() {
     const [news, setNews] = useState(null)

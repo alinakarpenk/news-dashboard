@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import styles from "../../../../../public/style/edit.module.css"
+import styles from "../../../style/edit.module.css"
 
 export default function AddNews(){
     const [image, setImage] = useState(null);

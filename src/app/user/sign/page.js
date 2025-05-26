@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
 
-import styles from '../../../../public/style/user.module.css'
+import styles from '../../style/user.module.css'
 
 
 export default function Sign() {

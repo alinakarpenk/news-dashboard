@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../../../../../public/style/get-news.module.css"
+import styles from "../../../style/get-news.module.css"
 
 export default async function SearchResult({searchParams}) {
       const res = await fetch(`${process.env.BASE_URL}/api/news/search?q=${searchParams.q}`);

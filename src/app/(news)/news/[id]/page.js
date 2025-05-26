@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from 'next/image';
 import { useParams} from 'next/navigation';
-import styles from "../../../../../public/style/get-news.module.css"
+import styles from "../../../style/get-news.module.css"
 export default function GetNewsByPK() {
     const [news, setNews] = useState(null);
     const [comment, setComment] = useState('');

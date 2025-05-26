@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import styles from '../../../../../../public/style/edit.module.css'
+import styles from '../../../../style/edit.module.css'
 export default function EditNews() {
     const { id } = useParams(); 
     const [title, setTitle] = useState("");
@@ -53,7 +53,7 @@ const handleUpd = async (e) => {
             
             <form onSubmit={handleUpd} className={styles.form}>
              <div>
-                    {imageURL && (
+            {imageURL && (
             <img src={imageURL} alt="Поточне зображення" style={{ width: '200px', marginBottom: '10px' }} />
           )}
                 <input type="file"  accept="image/*" onChange={(event) => setImage(event.target.files[0])} className={styles.input}/>    
