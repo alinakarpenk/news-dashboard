@@ -4,7 +4,8 @@ import Image from "next/image"
 
 export default function Footer() {
     return(
-        <div className={styles.footer}>
+      <div>footer</div>
+       /* <div className={styles.footer}>
        <div className="about">
       <h3 className={styles.h3}>Про сайт</h3>
       <p>Сайт створенний для розміщення культурних події міста Житомир</p>
@@ -26,6 +27,6 @@ export default function Footer() {
        <Link href="https://www.instagram.com/"><Image src="/img/free-icon-instagram-1384015.png" alt="Instagram" width={30} height={30} priority /></Link>
       </div>
     </div>
-        </div>
+        </div>*/
     )
   }
